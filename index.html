@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Breeze Agent Bundle — Lean Labs</title>
+<meta name="description" content="Install the agents we use to drive $100M in client revenue. Free, in your HubSpot portal.">
+
+<!-- ============================================================
+     BREEZE AGENT BUNDLE — LANDING PAGE  (v2, post-Kevin review)
+
+     Changes from v1, per Kevin's audio + Slack notes 2026-07-13:
+       - New H1 (imperative, leads with the revenue proof)
+       - "To help you GRO" removed from H1 — it's Kevin's video hook now
+       - Video section added (was missing entirely)
+       - NO custom nav/footer. Placeholders only — the real site nav and
+         footer get dropped in by Edward. Kevin: "We're not going to have
+         pages with custom navs and footers that we have to maintain."
+       - "Get the bundle" is a FLOATING button (site nav links can't change)
+       - Agent cards: 1:1 image slot, headline, ONE short line
+       - 9:16 agent-image collage slot beside the form
+       - Centered text columns removed (Kevin's explicit gripe)
+
+     TO FILL BEFORE LIVE — search for  <<< FILL ME >>>
+       1. HUBSPOT_PORTAL_ID + HUBSPOT_FORM_GUID  (CONFIG, bottom of file)
+       2. Video embed URL
+       3. Agent images (1:1) + the form-side collage (9:16)
+     VERIFY: the "$100M in client revenue" claim and the review count.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&family=Roboto:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap">
+
+<style>
+  :root{
+    --bg:#0D0D0D; --bg-alt:#000; --card:#141414; --field:#1C1C1C; --border:#2B2B2B; --chip:#212121;
+    --text:#fff; --text-2:#949494; --text-3:#757575; --accent:#FDE68A;
+    --font-heading:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+    --font-body:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+  a{color:var(--text);text-decoration:none}
+  a:hover{color:#B0B0B0}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:0 64px}
+  .sec{padding:96px 0}
+  .secalt{background:var(--bg-alt)}
+  .col{display:flex;flex-direction:column}
+  .fx{display:flex}
+  .ac{align-items:center}
+  .jb{justify-content:space-between}
+
+  .eyebrow{font:600 13px/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);margin:0}
+  h1{font:600 56px/1.14 var(--font-heading);letter-spacing:-.015em;margin:0;text-wrap:pretty}
+  h2{font:600 42px/1.2 var(--font-heading);letter-spacing:-.01em;margin:0;text-wrap:pretty}
+  .sub{font:400 19px/1.6 var(--font-body);color:var(--text-2);margin:0}
+  .body{font:400 16px/1.65 var(--font-body);color:var(--text-2);margin:0}
+  .fs13{font-size:13px}
+  .wt{color:var(--text)}
+  .dim{color:var(--text-3)}
+
+  .card{background:var(--card);border-radius:16px;box-shadow:inset 0 0 0 1px var(--border)}
+  .ms{font-family:'Material Symbols Outlined';font-size:22px;line-height:1}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;
+       border-radius:8px;border:0;cursor:pointer;background:#fff;color:#0D0D0D;
+       font:600 15px/1.35 var(--font-body);box-shadow:0 1px 2px rgba(10,13,18,.05);transition:opacity .15s}
+  .btn:hover{opacity:.88;color:#0D0D0D}
+  .btn--secondary{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px var(--border)}
+  .btn--secondary:hover{color:#fff;background:#1C1C1C;opacity:1}
+  .btn--full{width:100%}
+  .btn[disabled]{opacity:.5;cursor:not-allowed}
+
+  /* Floating CTA — Kevin: site nav links can't be changed, so float it */
+  .float-cta{position:fixed;right:24px;bottom:24px;z-index:50;
+             box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;pointer-events:none;
+             transform:translateY(8px);transition:opacity .2s,transform .2s}
+  .float-cta.show{opacity:1;pointer-events:auto;transform:none}
+
+  /* Nav / footer placeholders — real ones come from the site template */
+  .tpl{border:1px dashed #3A3A3A;border-radius:8px;padding:18px;text-align:center;
+       font:600 12px/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+
+  /* Hero: 2-col, left-aligned. Kills the centered column Kevin dislikes,
+     and gives the video a home. */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+
+  /* Video */
+  .video{aspect-ratio:16/9;background:var(--card);box-shadow:inset 0 0 0 1px var(--border);
+         border-radius:16px;overflow:hidden;position:relative}
+  .video iframe{width:100%;height:100%;border:0;display:block}
+  .video-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+  .play{width:64px;height:64px;border-radius:100px;background:var(--chip);box-shadow:inset 0 0 0 1px var(--border);
+        display:flex;align-items:center;justify-content:center;color:#B0B0B0}
+  .play .ms{font-size:32px}
+  .tag{display:inline-flex;align-items:center;font:600 11px/1 var(--font-body);letter-spacing:.08em;
+       text-transform:uppercase;color:var(--accent);background:rgba(253,230,138,.07);
+       box-shadow:inset 0 0 0 1px rgba(253,230,138,.28);border-radius:4px;padding:5px 8px}
+
+  /* Agent cards — 1:1 image, headline, ONE line */
+  .agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .acard{padding:20px;display:flex;flex-direction:column;gap:14px}
+  .aimg{aspect-ratio:1/1;border-radius:10px;background:var(--chip);box-shadow:inset 0 0 0 1px var(--border);
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#B0B0B0}
+  .aimg .ms{font-size:34px}
+  .aimg-lab{font:600 10px/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+  .aname{font:600 19px/1.3 var(--font-heading);color:#fff;margin:0}
+  .aline{font:400 15px/1.5 var(--font-body);color:var(--text-2);margin:0}
+
+  /* Form block: 9:16 collage + form side by side */
+  .formgrid{display:grid;grid-template-columns:.42fr 1fr;gap:32px;align-items:stretch}
+  .collage{aspect-ratio:9/16;border-radius:16px;background:var(--card);box-shadow:inset 0 0 0 1px var(--border);
+           display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px}
+
+  /* Form */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .inp{width:100%;background:var(--field);border:0;box-shadow:inset 0 0 0 1px var(--border);border-radius:8px;
+       padding:12px 14px;font:400 16px/1.5 var(--font-body);color:#fff;outline:none}
+  .inp:focus{box-shadow:inset 0 0 0 1px var(--text-3)}
+  .inp::placeholder{color:var(--text-3)}
+  .lab{font:600 13px/1.4 var(--font-body);color:var(--text-2);display:block;margin:0 0 8px}
+  .help{font:400 13px/1.5 var(--font-body);color:var(--text-3);margin:6px 0 0}
+  .chkrow{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:8px;background:var(--field);
+          box-shadow:inset 0 0 0 1px var(--border);cursor:pointer;user-select:none}
+  .chkrow:hover{background:#2A2A2A}
+  .chkrow input{position:absolute;opacity:0;width:0;height:0}
+  .chkrow input:focus-visible + .box{outline:2px solid #fff;outline-offset:2px}
+  .box{width:18px;height:18px;border-radius:4px;box-shadow:inset 0 0 0 1px var(--text-3);flex-shrink:0;
+       display:flex;align-items:center;justify-content:center}
+  .box svg{opacity:0}
+  .chkrow input:checked + .box{background:#fff;box-shadow:none}
+  .chkrow input:checked + .box svg{opacity:1}
+  .chklab{font:400 15px/1.5 var(--font-body);color:#fff}
+  .linkbtn{font:600 14px/1.5 var(--font-body);color:#fff;background:none;border:0;cursor:pointer;padding:0;
+           text-decoration:underline;text-underline-offset:3px}
+  .linkbtn:hover{color:#B0B0B0}
+  .formerr{color:#FCA5A5;font:400 14px/1.5 var(--font-body);margin:12px 0 0;display:none}
+
+  /* Free block — left-aligned 2-col, NOT a centered column */
+  .freegrid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+
+  @media (max-width:960px){
+    .wrap{padding:0 20px}
+    .sec{padding:56px 0}
+    h1{font-size:36px}
+    h2{font-size:28px}
+    .hero,.formgrid,.freegrid{grid-template-columns:1fr;gap:32px}
+    .agrid{grid-template-columns:1fr}
+    .grid2{grid-template-columns:1fr}
+    .collage{aspect-ratio:16/9}
+    .float-cta{right:16px;bottom:16px;left:16px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ==== REGULAR SITE NAV GOES HERE (Edward: drop in the standard template nav) ==== -->
+<div class="wrap" style="padding-top:20px">
+  <div class="tpl">Regular site nav goes here</div>
+</div>
+
+<!-- Hero + video -->
+<section class="sec" style="padding-top:56px">
+  <div class="wrap hero">
+    <div class="col" style="gap:22px">
+      <p class="eyebrow">The Breeze Agent Bundle</p>
+      <!-- VERIFY: is $100M defensible? It's the biggest claim on the page. -->
+      <h1>Install the agents we use to drive $100M in client revenue. Free.</h1>
+      <p class="sub">Pick the ones you want. We install them in your HubSpot by hand, at no cost.</p>
+      <div class="fx ac" style="gap:14px;flex-wrap:wrap">
+        <a class="btn" href="#form">Get the bundle</a>
+        <span class="body fs13 dim">Free through July 23. No card, no catch.</span>
+      </div>
+    </div>
+
+    <div class="video">
+      <!-- <<< FILL ME: video embed. This is Kevin's "GRO" play. -->
+      <!-- <iframe src="VIDEO_EMBED_URL" title="The Breeze Agent Bundle" allowfullscreen></iframe> -->
+      <div class="video-ph">
+        <span class="play"><span class="ms">play_arrow</span></span>
+        <p class="body">Kevin explains the bundle in 90 seconds</p>
+        <span class="tag">Video placeholder — Kevin records</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why we're doing this -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap" style="display:grid;grid-template-columns:1fr 1.2fr;gap:64px">
+    <div class="col" style="gap:16px">
+      <p class="eyebrow">Why we're doing this</p>
+      <h2>We've been building these for years. Right now they're free.</h2>
+    </div>
+    <div class="col" style="gap:16px;justify-content:center">
+      <p class="body"><span class="wt">Lean Labs has been building AI agents for years. We run our own business on one.</span></p>
+      <p class="body">HubSpot has a campaign right now where partners are incentivized to give agents away. That's why this is free.</p>
+      <p class="body">So pick the agents you want, and we'll put them in your portal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- The bundle -->
+<section class="sec secalt">
+  <div class="wrap col" style="gap:28px">
+    <div class="col" style="gap:12px;max-width:640px">
+      <p class="eyebrow">The bundle</p>
+      <h2>The Breeze Agent Bundle</h2>
+      <p class="sub">Completely free. Pick the ones you want, or take all of them.</p>
+    </div>
+
+    <div class="agrid" id="agent-cards"><!-- rendered from AGENTS config --></div>
+
+    <p class="body" style="max-width:820px">
+      <span class="wt">AEO</span> finds the questions buyers actually ask.
+      <span class="wt">SEO</span> proves those questions have real search volume behind them.
+      <span class="wt">CRO</span> shows you what your traffic does when it lands.
+    </p>
+  </div>
+</section>
+
+<!-- Upsell -->
+<section class="sec" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="card fx ac jb" style="padding:40px;gap:32px;flex-wrap:wrap">
+      <p class="body" style="max-width:640px;font-size:18px">These are a few of the agents we've built. There are more, and we can build them into your business, or run them for you.</p>
+      <a class="btn btn--secondary" id="cta-more" href="https://www.lean-labs.com" target="_blank" rel="noopener">See what else we do</a>
+    </div>
+  </div>
+</section>
+
+<!-- THE FORM + 9:16 agent-image collage -->
+<section class="sec" id="form">
+  <div class="wrap formgrid">
+
+    <!-- <<< FILL ME: 9:16 collage of the agent images -->
+    <div class="collage">
+      <span class="ms" style="font-size:34px;color:#B0B0B0">grid_view</span>
+      <p class="body fs13">Agent image collage</p>
+      <span class="tag">Image placeholder — 9:16</span>
+    </div>
+
+    <div class="card" style="padding:40px">
+      <div class="col" style="gap:12px;margin-bottom:20px">
+        <h2 style="font-size:32px">Which agents do you want?</h2>
+        <div class="fx ac jb" style="flex-wrap:wrap;gap:12px">
+          <p class="body">All of them are checked, so uncheck any you don't want.</p>
+          <button class="linkbtn" type="button" id="select-all">Give me the full bundle</button>
+        </div>
+      </div>
+
+      <form id="breeze-form" novalidate>
+        <div class="col" style="gap:8px;margin-bottom:20px" id="agent-checkboxes"></div>
+
+        <div class="grid2">
+          <div>
+            <label class="lab" for="f-name">Name</label>
+            <input class="inp" id="f-name" name="firstname" placeholder="Your name" required>
+          </div>
+          <div>
+            <label class="lab" for="f-email">Work email</label>
+            <input class="inp" id="f-email" name="email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div>
+            <label class="lab" for="f-company">Company</label>
+            <input class="inp" id="f-company" name="company" placeholder="Company name" required>
+          </div>
+          <div>
+            <label class="lab" for="f-portal">HubSpot portal ID</label>
+            <input class="inp" id="f-portal" name="hubspot_portal_id" placeholder="e.g. 8842291" required>
+            <p class="help">The number in your HubSpot URL.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <label class="lab" for="f-website">Website URL</label>
+          <input class="inp" id="f-website" name="website" type="url" placeholder="https://" required>
+          <p class="help">We use this to pre-configure your agents.</p>
+        </div>
+
+        <p class="formerr" id="form-error"></p>
+
+        <button class="btn btn--full" type="submit" id="submit-btn" style="margin-top:20px">Get my agents</button>
+        <p class="body fs13" style="margin-top:12px">It's free, with no card and no catch. We install by hand, so there's a short line.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Free block — left-aligned, no centered column -->
+<section class="sec secalt">
+  <div class="wrap freegrid">
+    <div class="col" style="gap:16px">
+      <h2 style="font-size:44px">It's free now, and it stays free.</h2>
+      <a class="btn" style="align-self:flex-start;margin-top:8px" href="#form">Get the bundle</a>
+    </div>
+    <div class="col" style="gap:16px">
+      <p class="body" style="font-size:18px">Credit usage is on us through <span class="wt">July 23</span>, so get on the waitlist and we can get in and run your core agents.</p>
+      <p class="body" style="font-size:18px">After that, these agents run on <span class="wt">less than half your monthly credits</span>, quietly feeding you what you need. It still doesn't cost you anything.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==== REGULAR SITE FOOTER GOES HERE (Edward: drop in the standard template footer) ==== -->
+<div class="wrap" style="padding-bottom:32px">
+  <div class="tpl">Regular site footer goes here</div>
+</div>
+
+<!-- Floating CTA — Kevin: can't change the site nav links, so float it -->
+<a class="btn float-cta" id="float-cta" href="#form">Get the bundle</a>
+
+<script>
+/* ==================================================================
+   CONFIG
+   ================================================================== */
+const HUBSPOT_PORTAL_ID = '';   // <<< FILL ME
+const HUBSPOT_FORM_GUID = '';   // <<< FILL ME
+// Relative so it works in preview. Edward: point this at the real HubSpot thank-you page.
+const THANK_YOU_URL = 'thank-you.html';
+
+/* Agents. `img` is the 1:1 image slot — swap the icon for a real <img> when ready.
+   Descriptions are ONE line each, per Kevin. */
+const AGENTS = [
+  { name: 'AEO Fan-Out Query Agent',  icon: 'travel_explore',
+    line: 'Finds the questions AI asks about your topic before it recommends anyone.' },
+  { name: 'SEO Topic Cluster Analyzer', icon: 'hub',
+    line: 'Turns one keyword into the clusters around it, sized by real search volume.' },
+  { name: 'SEO Keyword Research Agent', icon: 'query_stats',
+    line: 'Tells you whether a keyword is worth writing for, before you write it.' },
+  { name: 'Schema Markup Generator',  icon: 'code',
+    line: 'Writes the structured data that tells AI what your pages are about.' },
+  { name: 'Website Conversion Grader', icon: 'speed',
+    line: 'Grades any page 0 to 100 and tells you what to fix first.' }
+];
+
+/* ==================================================================
+   RENDER
+   ================================================================== */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CHECK_SVG = '<svg width="12" height="10" viewBox="0 0 13 10" fill="none" aria-hidden="true"><path d="M 4.2 7.5 L 1.3 4.5 L 0 5.8 L 4.2 10 L 13 1.3 L 11.7 0 L 4.2 7.5 Z" fill="#0D0D0D"></path></svg>';
+
+document.getElementById('agent-cards').innerHTML = AGENTS.map(a => `
+  <div class="card acard">
+    <div class="aimg">
+      <span class="ms">${esc(a.icon)}</span>
+      <span class="aimg-lab">Image · 1:1</span>
+    </div>
+    <h3 class="aname">${esc(a.name)}</h3>
+    <p class="aline">${esc(a.line)}</p>
+  </div>`).join('');
+
+document.getElementById('agent-checkboxes').innerHTML = AGENTS.map((a, i) => `
+  <label class="chkrow" for="ag-${i}">
+    <input type="checkbox" id="ag-${i}" name="agents" value="${esc(a.name)}" checked>
+    <span class="box">${CHECK_SVG}</span>
+    <span class="chklab">${esc(a.name)}</span>
+  </label>`).join('');
+
+document.getElementById('select-all').addEventListener('click', () => {
+  document.querySelectorAll('input[name="agents"]').forEach(c => { c.checked = true; });
+  track('breeze_select_all_agents');
+});
+
+/* Floating CTA appears once the hero button scrolls away, hides at the form. */
+const floatCta = document.getElementById('float-cta');
+const formSec = document.getElementById('form');
+function syncFloatCta() {
+  const past = window.scrollY > 520;
+  const atForm = formSec.getBoundingClientRect().top < window.innerHeight * 0.9;
+  floatCta.classList.toggle('show', past && !atForm);
+}
+window.addEventListener('scroll', syncFloatCta, { passive: true });
+window.addEventListener('resize', syncFloatCta, { passive: true });
+syncFloatCta();   // also correct on load (deep link, refresh mid-page)
+
+/* ==================================================================
+   TRACKING
+   ================================================================== */
+function track(event, props) {
+  try { window._hsq = window._hsq || []; window._hsq.push(['trackCustomBehavioralEvent', { name: event, properties: props || {} }]); } catch (e) {}
+  try { if (typeof window.gtag === 'function') window.gtag('event', event, props || {}); } catch (e) {}
+  try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: event }, props || {})); } catch (e) {}
+}
+track('breeze_landing_view', { page: 'breeze-agent-bundle' });
+document.getElementById('cta-more').addEventListener('click', () => track('breeze_upsell_click'));
+
+/* ==================================================================
+   SUBMIT
+   ================================================================== */
+const form = document.getElementById('breeze-form');
+const submitBtn = document.getElementById('submit-btn');
+const errEl = document.getElementById('form-error');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errEl.style.display = 'none';
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+
+  const picked = [...document.querySelectorAll('input[name="agents"]:checked')].map(c => c.value);
+  if (!picked.length) {
+    errEl.textContent = 'Pick at least one agent.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const d = new FormData(form);
+  const fields = [
+    { name: 'firstname',         value: d.get('firstname') },
+    { name: 'email',             value: d.get('email') },
+    { name: 'company',           value: d.get('company') },
+    { name: 'website',           value: d.get('website') },
+    { name: 'hubspot_portal_id', value: d.get('hubspot_portal_id') },
+    { name: 'requested_agents',  value: picked.join('; ') }
+  ];
+
+  track('breeze_form_submit', { agents_selected: picked.length, agents: picked.join('; ') });
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+
+  if (!HUBSPOT_PORTAL_ID || !HUBSPOT_FORM_GUID) {
+    console.warn('[breeze] HubSpot IDs not set — submission NOT saved. See CONFIG.');
+    console.info('[breeze] payload:', fields);
+    window.location.href = THANK_YOU_URL;
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fields, context: {
+          pageUri: window.location.href, pageName: 'Breeze Agent Bundle',
+          hutk: (document.cookie.match(/hubspotutk=([^;]*)/) || [])[1] } }) }
+    );
+    if (!res.ok) throw new Error('HubSpot returned ' + res.status);
+    window.location.href = THANK_YOU_URL;
+  } catch (err) {
+    console.error('[breeze] submit failed:', err);
+    errEl.textContent = "That didn't go through. Try again, or email us at hello@lean-labs.com and we'll get you in.";
+    errEl.style.display = 'block';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Get my agents';
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You're in — Lean Labs</title>
+<meta name="robots" content="noindex, nofollow">
+
+<!-- ============================================================
+     BREEZE AGENT BUNDLE — THANK YOU PAGE
+     Implemented from Claude Design "Thank You.dc.html"
+     Project: Breeze Agent Bundle Funnel
+
+     TWO VALUES MUST BE FILLED BEFORE THIS GOES LIVE.
+     Both are marked  <<< FILL ME >>>  below:
+       1. PARTNER_LINK  — the HubSpot partner-ID connect URL
+       2. VIDEO_EMBED   — Kevin's video (HubSpot/Loom/YouTube embed src)
+
+     This page IS the conversion event. The form fill is a lead;
+     the partner-link click is portal access. That click is
+     instrumented below — do not strip the tracking.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&family=Roboto:wght@400;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap">
+
+<style>
+  :root{
+    --bg:#0D0D0D; --card:#141414; --border:#2B2B2B; --chip:#212121;
+    --text:#fff; --text-2:#949494; --text-3:#757575; --accent:#FDE68A;
+    --font-heading:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+    --font-body:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+    --radius-md:8px; --radius-lg:16px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+  a{color:var(--text);text-decoration:none}
+  a:hover{color:#B0B0B0}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:0 64px}
+  .sec{padding:80px 0}
+  .col{display:flex;flex-direction:column}
+  .fx{display:flex}
+  .ac{align-items:center}
+  .jb{justify-content:space-between}
+  .tc{text-align:center}
+
+  .eyebrow{font:600 13px/1.4 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);margin:0}
+  h1{font:600 56px/1.15 var(--font-heading);letter-spacing:-.015em;margin:0}
+  h2{font:600 36px/1.25 var(--font-heading);letter-spacing:-.01em;margin:0;text-wrap:pretty}
+  .sub{font:400 18px/1.6 var(--font-body);color:var(--text-2);margin:0}
+  .body{font:400 16px/1.65 var(--font-body);color:var(--text-2);margin:0}
+  .small{font-size:14px}
+  .wt{color:var(--text)}
+  .dim{color:var(--text-3)}
+
+  .card{background:var(--card);border-radius:var(--radius-lg);box-shadow:inset 0 0 0 1px var(--border)}
+  .wm{height:22px;width:auto;filter:invert(1);display:block;align-self:flex-start;flex-shrink:0}
+  .ms{font-family:'Material Symbols Outlined';font-size:36px;line-height:1}
+
+  /* Button — design-system "alternate" variant: white on dark */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+       padding:14px 24px;border-radius:var(--radius-md);border:0;cursor:pointer;
+       background:#fff;color:#0D0D0D;
+       font:600 15px/1.35 var(--font-body);
+       box-shadow:0 1px 2px rgba(10,13,18,.05);transition:opacity .15s}
+  .btn:hover{opacity:.88;color:#0D0D0D}
+
+  /* Video */
+  .video{aspect-ratio:16/9;background:var(--card);box-shadow:inset 0 0 0 1px var(--border);
+         border-radius:var(--radius-lg);overflow:hidden;position:relative}
+  .video iframe{width:100%;height:100%;border:0;display:block}
+  .video-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+  .play{width:72px;height:72px;border-radius:100px;background:var(--chip);
+        box-shadow:inset 0 0 0 1px var(--border);display:flex;align-items:center;justify-content:center;color:#B0B0B0}
+  .tag{display:inline-flex;align-items:center;font:600 11px/1 var(--font-body);letter-spacing:.08em;
+       text-transform:uppercase;color:var(--accent);background:rgba(253,230,138,.07);
+       box-shadow:inset 0 0 0 1px rgba(253,230,138,.28);border-radius:4px;padding:5px 8px}
+
+  .numchip{width:32px;height:32px;border-radius:100px;background:var(--chip);
+           box-shadow:inset 0 0 0 1px var(--border);display:flex;align-items:center;justify-content:center;
+           font:600 14px/1 var(--font-heading);color:var(--text);flex-shrink:0}
+
+  /* Nav / footer placeholders — real ones come from the site template */
+  .tpl{border:1px dashed #3A3A3A;border-radius:8px;padding:18px;text-align:center;
+       font:600 12px/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+
+  /* Question form */
+  .inp{width:100%;background:#1C1C1C;border:0;box-shadow:inset 0 0 0 1px var(--border);border-radius:8px;
+       padding:12px 14px;font:400 16px/1.5 var(--font-body);color:#fff;outline:none;font-family:var(--font-body);resize:vertical}
+  .inp:focus{box-shadow:inset 0 0 0 1px var(--text-3)}
+  .inp::placeholder{color:var(--text-3)}
+  .fs13{font-size:13px}
+
+  @media (max-width:960px){
+    .wrap{padding:0 20px}
+    .sec{padding:48px 0}
+    h1{font-size:40px}
+    h2{font-size:28px}
+    .footer-row{flex-direction:column;align-items:flex-start;gap:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ==== REGULAR SITE NAV GOES HERE (Edward: drop in the standard template nav) ==== -->
+<div class="wrap" style="padding-top:20px">
+  <div class="tpl">Regular site nav goes here</div>
+</div>
+
+<!-- Confirmation -->
+<section class="sec" style="padding-bottom:48px">
+  <div class="wrap col ac tc" style="gap:20px;max-width:800px">
+    <p class="eyebrow">The Breeze Agent Bundle</p>
+    <h1>You're in.</h1>
+    <p class="sub" style="max-width:560px">We install these by hand, one portal at a time, so there's a short line. We'll get to you as soon as we can.</p>
+  </div>
+</section>
+
+<!-- Video -->
+<section style="padding-bottom:80px">
+  <div class="wrap" style="max-width:880px">
+    <div class="video">
+
+      <!-- <<< FILL ME (1/2): VIDEO_EMBED >>>
+           When Kevin's video is recorded, delete the .video-ph block below
+           and uncomment this iframe with the real embed src. -->
+      <!--
+      <iframe src="VIDEO_EMBED_URL"
+              title="How this works, in one minute"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+              allowfullscreen></iframe>
+      -->
+
+      <div class="video-ph">
+        <span class="play"><span class="ms">play_arrow</span></span>
+        <p class="body">How this works, in one minute</p>
+        <span class="tag">Video placeholder — Kevin records</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Add us to your HubSpot — THE conversion event -->
+<section style="padding-bottom:80px">
+  <div class="wrap" style="max-width:880px">
+    <div class="card col ac tc" style="padding:48px;gap:16px">
+      <h2>Add us to your HubSpot</h2>
+      <p class="body" style="max-width:520px">
+        You add us to your portal, Ralph greets you and installs your agents. We add one other person,
+        Kevin Barber, our head of AI growth. If you want, he'll look at your data and give you his best
+        guidance, and that part is completely optional.
+      </p>
+
+      <!-- <<< FILL ME (2/2): PARTNER_LINK >>>
+           Replace href="#" with the HubSpot partner-ID connect URL.
+           Keep the id, the data attribute, and the onclick tracking intact. -->
+      <a id="partner-connect"
+         class="btn"
+         style="margin-top:8px"
+         href="#"
+         data-partner-link="pending"
+         rel="noopener">
+        Add Lean Labs to my portal
+      </a>
+
+      <p class="body small">This grants us access to install your agents. You can remove us any time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- What we ask in return -->
+<section style="padding-bottom:112px">
+  <div class="wrap col" style="max-width:640px;gap:24px">
+    <h2 style="font-size:28px">This is free. Two things we'd love back:</h2>
+    <div class="fx" style="gap:16px">
+      <span class="numchip">1</span>
+      <p class="body" style="padding-top:5px"><span class="wt">Feedback.</span> Tell us if the agents are useful or useless, because both help.</p>
+    </div>
+    <div class="fx" style="gap:16px">
+      <span class="numchip">2</span>
+      <p class="body" style="padding-top:5px"><span class="wt">A five-star review</span>, if they earn it.</p>
+    </div>
+    <p class="body">And if you like what you see when the data comes in, we should probably talk.</p>
+  </div>
+</section>
+
+<!-- Got a question? — Kevin: "I don't want them just to all book on my calendar." -->
+<section style="padding-bottom:112px">
+  <div class="wrap" style="max-width:640px">
+    <div class="card col" style="padding:40px;gap:16px">
+      <h2 style="font-size:26px">Got a question first?</h2>
+      <p class="body">Ask here and we'll come back to you. No call needed.</p>
+      <form id="question-form" class="col" style="gap:12px" novalidate>
+        <input class="inp" id="q-email" name="email" type="email" placeholder="Your work email" required>
+        <textarea class="inp" id="q-msg" name="question" rows="3" placeholder="What do you want to know?" required></textarea>
+        <button class="btn" type="submit" id="q-submit" style="align-self:flex-start">Send it</button>
+        <p class="body fs13" id="q-done" style="display:none;color:#fff">Got it. We'll get back to you.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ==== REGULAR SITE FOOTER GOES HERE (Edward: drop in the standard template footer) ==== -->
+<div class="wrap" style="padding-bottom:32px">
+  <div class="tpl">Regular site footer goes here</div>
+</div>
+
+<script>
+/* ------------------------------------------------------------------
+   CONVERSION TRACKING
+
+   Kevin: "I can't see the number of clicks we're getting to the page."
+   This is the fix. The partner-link click is offer-market fit — the
+   moment a lead becomes portal access. Everything else is a vibe.
+
+   Fires to: HubSpot analytics (_hsq), GA4 (gtag), dataLayer.
+   Each is guarded, so this is safe if any one of them isn't loaded.
+------------------------------------------------------------------ */
+(function () {
+  var link = document.getElementById('partner-connect');
+  if (!link) return;
+
+  function track(event, props) {
+    try {
+      window._hsq = window._hsq || [];
+      window._hsq.push(['trackCustomBehavioralEvent', { name: event, properties: props || {} }]);
+    } catch (e) {}
+    try { if (typeof window.gtag === 'function') window.gtag('event', event, props || {}); } catch (e) {}
+    try { (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: event }, props || {})); } catch (e) {}
+  }
+
+  // Page reached = form was submitted.
+  track('breeze_thankyou_view', { page: 'breeze-agent-bundle-thankyou' });
+
+  link.addEventListener('click', function () {
+    // THE conversion: they are granting portal access.
+    track('breeze_partner_connect_click', { page: 'breeze-agent-bundle-thankyou' });
+
+    if (link.getAttribute('data-partner-link') === 'pending') {
+      console.warn('[breeze] PARTNER_LINK not set — see <<< FILL ME (2/2) >>> in this file.');
+    }
+  });
+
+  // Question form — keeps people off Kevin's calendar.
+  var qForm = document.getElementById('question-form');
+  if (qForm) {
+    qForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!qForm.checkValidity()) { qForm.reportValidity(); return; }
+      track('breeze_question_submit', {
+        question: document.getElementById('q-msg').value.slice(0, 500)
+      });
+      // TODO Edward: point this at the HubSpot question form (or a ticket).
+      document.getElementById('q-submit').disabled = true;
+      document.getElementById('q-done').style.display = 'block';
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
