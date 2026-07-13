@@ -41,6 +41,8 @@ Search the code for `<<< FILL ME` and `TODO`. Four things:
 3. **Video** — Kevin records it. Two slots have a commented-out `<iframe>` ready: landing hero and thank-you top.
 4. **Question form** — on `thank-you.html`. Currently shows a confirmation without sending anywhere.
 
+Also: **don't add unsourced stats.** See [Claims](#claims) below.
+
 ## Design rules (from Kevin — please don't undo)
 
 - **Use the regular site nav and footer.** The dashed placeholder boxes mark where they go. *"We're not going to have pages with custom navs and footers that we have to maintain."*
@@ -79,14 +81,11 @@ Kevin can't currently see clicks to the page. These events fix that. They fire t
 | `breeze_partner_connect_click` | **The conversion** — granting portal access |
 | `breeze_question_submit` | Question form used |
 
-## Unverified claims ⚠️
+## Claims
 
-Both are live on the page and neither is confirmed:
+**There are no unsourced stats on this page, and it should stay that way.**
 
-- **"$100M in client revenue"** — in the H1
-- **"70+ five-star reviews"** — under the hero CTA
-
-Confirm or change before this is public.
+Earlier drafts carried "$100M in client revenue", "70+ five-star reviews" and "Diamond Partner since 2013". None of them could be sourced, so all three are gone. If you want a number back, bring the source with it.
 
 ## Full handoff
 
