@@ -104,16 +104,16 @@
   .agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
   .acard{padding:20px;display:flex;flex-direction:column;gap:14px}
   .aimg{aspect-ratio:1/1;border-radius:10px;background:var(--chip);box-shadow:inset 0 0 0 1px var(--border);
-        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#B0B0B0}
-  .aimg .ms{font-size:34px}
-  .aimg-lab{font:600 10px/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+        overflow:hidden;display:flex}
+  .aimg img{width:100%;height:100%;object-fit:cover;display:block}
   .aname{font:600 19px/1.3 var(--font-heading);color:#fff;margin:0}
   .aline{font:400 15px/1.5 var(--font-body);color:var(--text-2);margin:0}
 
   /* Form block: 9:16 collage + form side by side */
   .formgrid{display:grid;grid-template-columns:.42fr 1fr;gap:32px;align-items:stretch}
   .collage{aspect-ratio:9/16;border-radius:16px;background:var(--card);box-shadow:inset 0 0 0 1px var(--border);
-           display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px}
+           overflow:hidden;display:flex}
+  .collage img{width:100%;height:100%;object-fit:cover;display:block}
 
   /* Form */
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -236,11 +236,9 @@
 <section class="sec" id="form">
   <div class="wrap formgrid">
 
-    <!-- <<< FILL ME: 9:16 collage of the agent images -->
+    <!-- 9:16 agent collage. First-pass artwork — Kevin swaps in the finals. -->
     <div class="collage">
-      <span class="ms" style="font-size:34px;color:#B0B0B0">grid_view</span>
-      <p class="body fs13">Agent image collage</p>
-      <span class="tag">Image placeholder — 9:16</span>
+      <img src="assets/agents/collage.svg" alt="The five Breeze agents">
     </div>
 
     <div class="card" style="padding:40px">
@@ -321,18 +319,18 @@ const HUBSPOT_FORM_GUID = '';   // <<< FILL ME
 // Relative so it works in preview. Edward: point this at the real HubSpot thank-you page.
 const THANK_YOU_URL = 'thank-you.html';
 
-/* Agents. `img` is the 1:1 image slot — swap the icon for a real <img> when ready.
+/* Agents. `img` is the 1:1 card image — first-pass artwork, Kevin swaps in finals.
    Descriptions are ONE line each, per Kevin. */
 const AGENTS = [
-  { name: 'AEO Fan-Out Query Agent',  icon: 'travel_explore',
+  { name: 'AEO Fan-Out Query Agent',  img: 'assets/agents/aeo-fan-out.svg',
     line: 'Finds the questions AI asks about your topic before it recommends anyone.' },
-  { name: 'SEO Topic Cluster Analyzer', icon: 'hub',
+  { name: 'SEO Topic Cluster Analyzer', img: 'assets/agents/seo-topic-cluster.svg',
     line: 'Turns one keyword into the clusters around it, sized by real search volume.' },
-  { name: 'SEO Keyword Research Agent', icon: 'query_stats',
+  { name: 'SEO Keyword Research Agent', img: 'assets/agents/seo-keyword-research.svg',
     line: 'Tells you whether a keyword is worth writing for, before you write it.' },
-  { name: 'Schema Markup Generator',  icon: 'code',
+  { name: 'Schema Markup Generator',  img: 'assets/agents/schema-markup.svg',
     line: 'Writes the structured data that tells AI what your pages are about.' },
-  { name: 'Website Conversion Grader', icon: 'speed',
+  { name: 'Website Conversion Grader', img: 'assets/agents/conversion-grader.svg',
     line: 'Grades any page 0 to 100 and tells you what to fix first.' }
 ];
 
@@ -344,10 +342,7 @@ const CHECK_SVG = '<svg width="12" height="10" viewBox="0 0 13 10" fill="none" a
 
 document.getElementById('agent-cards').innerHTML = AGENTS.map(a => `
   <div class="card acard">
-    <div class="aimg">
-      <span class="ms">${esc(a.icon)}</span>
-      <span class="aimg-lab">Image · 1:1</span>
-    </div>
+    <div class="aimg"><img src="${esc(a.img)}" alt="${esc(a.name)}" loading="lazy"></div>
     <h3 class="aname">${esc(a.name)}</h3>
     <p class="aline">${esc(a.line)}</p>
   </div>`).join('');
